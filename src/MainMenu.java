@@ -1,11 +1,14 @@
+import service.HotelService;
+
 import java.util.Scanner;
 
 public class MainMenu {
 
     public static void mainMenu() {
 
-    String line = "";
+    HotelService hotelService = new HotelService();
     Scanner scanner = new Scanner(System.in);
+    String line = "";
 
     printMainMenu();
 
@@ -19,21 +22,21 @@ public class MainMenu {
                         String name = scanner.nextLine();
                         System.out.println("Enter surname:");
                         String surname = scanner.nextLine();
-//                      TODO  service.registerGuest(name, surname);
+                        hotelService.registerGuest(name, surname);
                         break;
                     case '2':
                         System.out.println("Enter room number to checkout:");
                         int roomNumber = scanner.nextInt();
-//                      TODO  service.checkoutGuest(roomNumber);
+                        hotelService.checkoutGuest(roomNumber);
                         break;
                     case '3':
-//                      TODO  service.reviewOccupancy();
+                        hotelService.reviewOccupancy();
                         break;
                     case '4':
-//                      TODO  service.roomHistory();
+                        hotelService.roomHistory();
                         break;
                     case '5':
-//                      TODO  service.roomHistory();
+                        hotelService.roomHistory();
                         break;
                     case '6':
                         System.out.println("Exit");
