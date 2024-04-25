@@ -1,18 +1,18 @@
 package service;
 
-import com.sun.tools.javac.Main;
 import model.room.Room;
 import model.guest.Guest;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HotelService {
-    private List<Room> rooms;
-    private List<Guest> registeredGuests;
-    private List<Guest> guestHistory;
+    private final List<Room> rooms;
+    private final List<Guest> registeredGuests;
+    private final List<Guest> guestHistory;
 
     public HotelService() {
         rooms = new ArrayList<>();
+        registeredGuests = new ArrayList<>();
         guestHistory = new ArrayList<>();
         for (int i = 1; i <= 5; i++) {
             rooms.add(new Room(i));
@@ -22,16 +22,21 @@ public class HotelService {
     public void registerGuest(String name, String surname) {
         Room availableRoom = findAvailableRoom();
         if (availableRoom != null) {
+            for (Guest guest : registeredGuests) {
+                if (guest.getName().equalsIgnoreCase(name) && guest.getSurname().equalsIgnoreCase(surname)) {
+                    System.out.println("Guest already registered with same name " + name + " and surname " + surname);
+                    return;
+                }
+            }
 
             Guest guest = new Guest(name, surname);
-//            TODO check that no dublicate guest and dont allow to checkin
             availableRoom.checkIn(guest);
+            registeredGuests.add(guest);
             guestHistory.add(guest);
             System.out.println("Guest " + name + " " + surname + " registered in room " + availableRoom.getRoomNumber());
         } else {
             System.out.println("Sorry, no rooms available at the moment.");
         }
-//        TODO reprint main menu
     }
 
     public void checkoutGuest(int roomNumber) {
@@ -41,6 +46,7 @@ public class HotelService {
         } else if (room != null) {
             Guest guest = room.getGuest();
             room.checkOut();
+            registeredGuests.remove(guest);
             System.out.println("Guest " + guest.getName() + " " + guest.getSurname() + " checked out of room " + roomNumber);
         } else {
             System.out.println("Invalid room number. Choose between 1 and 5.");
@@ -64,7 +70,7 @@ public class HotelService {
                 System.out.println("Room " + room.getRoomNumber() + " is available");
             } else {
                 Guest guest = room.getGuest();
-                System.out.println("Room " + room.getRoomNumber() + " occupied by " + guest.getName() + " " + guest.getSurname());
+                System.out.println("Room " + room.getRoomNumber() + " occupied by " + guest.getName());
             }
         }
     }
@@ -73,6 +79,7 @@ public class HotelService {
         System.out.println("Room history:");
         for (Guest guest : guestHistory) {
             System.out.println("Guest: " + guest.getName() + " " + guest.getSurname());
+//            TODO write at which room guest stayed
         }
     }
 
