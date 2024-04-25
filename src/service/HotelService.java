@@ -18,7 +18,16 @@ public class HotelService {
     }
 
     public void registerGuest(String name, String surname) {
-
+        Room availableRoom = findAvailableRoom();
+        if (availableRoom != null) {
+            Guest guest = new Guest(name, surname);
+//            TODO check that no dublicate guest and dont allow to checkin
+            availableRoom.checkIn(guest);
+            guestHistory.add(guest);
+            System.out.println("Guest " + name + " " + surname + " registered in room " + availableRoom.getRoomNumber());
+        } else {
+            System.out.println("Sorry, no rooms available at the moment.");
+        }
     }
 
     public void checkoutGuest(int roomNumber) {
@@ -29,8 +38,21 @@ public class HotelService {
 
     }
 
+    public void roomStatus() {
+
+    }
+
     public void roomHistory() {
 
+    }
+
+    private Room findAvailableRoom() {
+        for (Room room : rooms) {
+            if (room.isRoomFree()) {
+                return room;
+            }
+        }
+        return null; // No available room
     }
 
 }

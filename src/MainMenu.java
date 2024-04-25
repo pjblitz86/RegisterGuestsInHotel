@@ -33,7 +33,7 @@ public class MainMenu {
                         hotelService.reviewOccupancy();
                         break;
                     case '4':
-                        hotelService.roomHistory();
+                        hotelService.roomStatus();
                         break;
                     case '5':
                         hotelService.roomHistory();
