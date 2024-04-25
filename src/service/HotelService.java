@@ -48,15 +48,32 @@ public class HotelService {
     }
 
     public void reviewOccupancy() {
-
+        System.out.println("Room occupancy review:");
+        for (Room room : rooms) {
+            if (!room.isRoomFree()) {
+                Guest guest = room.getGuest();
+                System.out.println("Room " + room.getRoomNumber() + " occupied by " + guest.getName() + " " + guest.getSurname());
+            }
+        }
     }
 
     public void roomStatus() {
-
+        System.out.println("Room status:");
+        for (Room room : rooms) {
+            if (room.isRoomFree()) {
+                System.out.println("Room " + room.getRoomNumber() + " is available");
+            } else {
+                Guest guest = room.getGuest();
+                System.out.println("Room " + room.getRoomNumber() + " occupied by " + guest.getName() + " " + guest.getSurname());
+            }
+        }
     }
 
     public void roomHistory() {
-
+        System.out.println("Room history:");
+        for (Guest guest : guestHistory) {
+            System.out.println("Guest: " + guest.getName() + " " + guest.getSurname());
+        }
     }
 
     private Room findAvailableRoom() {
