@@ -1,7 +1,5 @@
 package model.guest;
 
-import model.room.Room;
-
 public class Guest {
     private final String name;
     private final String surname;

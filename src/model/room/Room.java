@@ -1,6 +1,4 @@
 package model.room;
-
-
 import model.guest.Guest;
 
 public class Room implements IRoom {

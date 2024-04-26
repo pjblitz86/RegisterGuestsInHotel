@@ -79,7 +79,6 @@ public class HotelService {
         System.out.println("Room history:");
         for (Guest guest : guestHistory) {
             System.out.println("Guest: " + guest.getName() + " " + guest.getSurname());
-//            TODO write at which room guest stayed
         }
     }
 

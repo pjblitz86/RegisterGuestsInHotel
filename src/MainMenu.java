@@ -1,5 +1,4 @@
 import service.HotelService;
-
 import java.util.Scanner;
 
 public class MainMenu {
